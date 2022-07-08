@@ -1,4 +1,9 @@
+using PhoneStoreApplication.MocksData;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSingleton<IPhoneMock, PhoneMock>();
+builder.Services.AddSingleton<IBrandMock, BrandMock>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

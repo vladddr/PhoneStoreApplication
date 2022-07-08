@@ -4,7 +4,7 @@ namespace PhoneStoreApplication.MocksData
 {
     public class PhoneMock : IPhoneMock
     {
-        private readonly BrandMock _brandMock = new BrandMock();
+        private readonly IBrandMock _brandMock = new BrandMock();
 
         public IEnumerable<Phone> Phones => new List<Phone>()
         {
