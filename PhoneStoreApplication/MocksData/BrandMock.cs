@@ -8,6 +8,7 @@ namespace PhoneStoreApplication.MocksData
         {
             new PhoneBrand { BrandName = "Apple" },
             new PhoneBrand { BrandName = "Xiaomi" }
-        };}
+        };
     }
 }
+
