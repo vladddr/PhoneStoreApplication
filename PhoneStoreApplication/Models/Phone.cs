@@ -20,5 +20,9 @@ namespace PhoneStoreApplication.Models
         public string ImageUrl { get; set; }
 
         public PhoneBrand PhoneBrand { get; set; }
+
+        public string Color { get; set; }
+
+        public string Storage { get; set; }
     }
 }
