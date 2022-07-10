@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Phone>
+
+@{
+   Layout = "_Layout";
+}
+
+<!DOCKTYPE html>
+<html lang="en">
+   <head>
+      <meta name="viewport" content="width=device-width" />
+      <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="~/css/phone.css" type="text/css"/>
+      <title>PhoneStore</title>
+   </head>
+   <body>
+      @if (!Model.Any())
+      {
+        <div class="text-center">Не знайдено телефонів для продажу</div>
+      }
+
+      <div class="row row-cols-1 row-cols-md-5 g-2">
+         @foreach (var phone in Model)
+         {
+            <div class="col">
+               <div class="card h-100 border-right-1 box-shadow">
+                  <img class="image-position" src="@phone.ImageUrl" \ alt="Phone Image">
+                  <div class="card-body">
+                     <h6 class="card-title h-20">@phone.PhoneNaming</h6>
+                     <p class="card-text">@phone.PhoneBrand.BrandName - @phone.OperatingSystem.ToString()</p>
+                     <p class="card-text">@phone.Price ₴</p>
+                  </div>
+
+                   <button type="button" class="btn button-color">Добавити до корзини</button>
+               </div>
+            </div>
+         }
+      </div>
+
+   </body>
+</html>

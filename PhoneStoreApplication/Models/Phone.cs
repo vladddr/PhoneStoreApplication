@@ -17,6 +17,8 @@ namespace PhoneStoreApplication.Models
 
         public short MainCamera { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public PhoneBrand PhoneBrand { get; set; }
     }
 }
