@@ -1,9 +1,10 @@
 ﻿using PhoneStoreApplication.Enumerations;
+using System.ComponentModel.DataAnnotations.Schema;
 using OperatingSystem = PhoneStoreApplication.Enumerations.OperatingSystem;
 
 namespace PhoneStoreApplication.Models
 {
-    public class Phone
+    public class Phone : BaseEntity
     {
         public string PhoneNaming { get; set; }
 
@@ -20,6 +21,9 @@ namespace PhoneStoreApplication.Models
         public string ImageUrl { get; set; }
 
         public PhoneBrand PhoneBrand { get; set; }
+
+        [ForeignKey("PhoneBrand")]
+        public int PhoneBrandId { get; set; }
 
         public string Color { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace PhoneStoreApplication.Models
 {
-    public class PhoneBrand
+    public class PhoneBrand : BaseEntity
     {
         public string BrandName {get; set; }
     }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using PhoneStoreApplication.Data.Repository;
 using PhoneStoreApplication.MocksData;
+using PhoneStoreApplication.Models;
 using PhoneStoreApplication.ViewModel;
 
 namespace PhoneStoreApplication.Controllers
@@ -10,36 +12,45 @@ namespace PhoneStoreApplication.Controllers
         public readonly IPhoneMock _phoneMock;
         public readonly IBrandMock _brandMock;
 
-        public PhoneController(IPhoneMock phoneMock, IBrandMock brandMock)
+        public readonly IGenericRepository<Phone> _phoneRepository;
+        public readonly IGenericRepository<PhoneBrand> _brandRepository;
+
+        public PhoneController(IPhoneMock phoneMock, IBrandMock brandMock,
+            IGenericRepository<Phone> phoneRepository,
+            IGenericRepository<PhoneBrand> brandRepository)
         {
             _phoneMock = phoneMock;
             _brandMock = brandMock;
+
+            _phoneRepository = phoneRepository;
+            _brandRepository = brandRepository;
         }
 
         [HttpGet]
-        public IActionResult Index(string brandName){
+        public async Task<IActionResult> IndexAsync(int? brandId){
 
             var viewModel = new FilteredPhonesViewModel();
 
-            if(brandName != null)
+            if(!brandId.HasValue)
             {
-                viewModel.FilteredPhones = _phoneMock.Phones.Where(p => p.PhoneBrand.BrandName == brandName);
+                viewModel.FilteredPhones = await _phoneRepository.GetAsync();
             }
             else
             {
-                viewModel.FilteredPhones = _phoneMock.Phones;
+                viewModel.FilteredPhones = await _phoneRepository.GetAsync(q => q.PhoneBrandId == brandId);
             }
 
-            viewModel.PhonesBrands = _brandMock.PhoneBrands.ToList().ConvertAll(b =>
+            var brands = await _brandRepository.GetAsync();
+
+            viewModel.PhonesBrands = brands.ToList().ConvertAll(b =>
             {
                 return new SelectListItem()
                 {
                     Text = b.BrandName.ToString(),
-                    Value = b.BrandName.ToString(),
+                    Value = b.Id.ToString(),
                 };
             });
 
-            // return all mock phones
             return View(viewModel);
         }
     }
