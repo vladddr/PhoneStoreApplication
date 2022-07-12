@@ -15,20 +15,6 @@ namespace PhoneStoreApplication.Controllers
             _phoneRepository = phoneRepository;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> IndexAsync()
-        {
-            List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart") ?? new List<CartItem>();
-
-            CartViewModel cartVM = new()
-            {
-                CartPhones = cart,
-                GrandTotal = cart.Sum(x => x.Quantity * x.UnitPrice)
-            };
-
-            return View(cartVM);
-        }
-
         public async Task<IActionResult> Add(long id)
         {
             Phone? phone = (await _phoneRepository.GetAsync(q => q.Id == id)).FirstOrDefault();
@@ -51,6 +37,21 @@ namespace PhoneStoreApplication.Controllers
             TempData["Success"] = "The product has been added!";
 
             return Redirect(Request.Headers["Referer"].ToString());
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> IndexAsync()
+        {
+            List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart") ?? new List<CartItem>();
+
+            CartViewModel cartVM = new()
+            {
+                CartPhones = cart,
+                GrandTotal = cart.Sum(x => x.Quantity * x.UnitPrice)
+            };
+
+            return View(cartVM);
         }
 
         public async Task<IActionResult> Decrease(long id)

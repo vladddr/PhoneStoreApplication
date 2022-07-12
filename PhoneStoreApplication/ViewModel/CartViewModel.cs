@@ -9,3 +9,4 @@ namespace PhoneStoreApplication.ViewModel
         public decimal GrandTotal { get; set; }
     }
 }
+
