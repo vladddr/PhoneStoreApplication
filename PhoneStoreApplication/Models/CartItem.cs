@@ -1,6 +1,6 @@
 ﻿namespace PhoneStoreApplication.Models
 {
-    public class CartItem : BaseEntity
+    public class CartItem
     {
         public int PhoneId { get; set; }
 
