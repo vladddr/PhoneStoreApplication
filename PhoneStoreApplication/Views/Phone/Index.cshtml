@@ -27,6 +27,11 @@
             <div class="col-sm-4"><input type="submit" value="Пошук" class="btn button-color col-sm-4" /></div>
          </div>
       </form>
+      
+      <div class="bg-success mt-3 text-white">
+          <vc:small-cart/>
+      </div>
+
       @if (!Model.FilteredPhones.Any())
       {
       <div class="text-center">Не знайдено телефонів для продажу</div>
