@@ -12,6 +12,10 @@ namespace PhoneStoreApplication.Data
 
         DbSet<PhoneBrand> Brands { get; set; }
 
+        DbSet<Order> Orders { get; set; }
+
+        DbSet<OrderItems> OrdersItems { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
